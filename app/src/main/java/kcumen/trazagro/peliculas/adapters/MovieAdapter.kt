@@ -18,6 +18,10 @@ import java.util.*
 class MovieAdapter:RecyclerView.Adapter<MovieHolder>(){
 
     var data:List<Movie> = emptyList()
+        set(value){
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
         holder.bind(data[position])
