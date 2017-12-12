@@ -1,21 +1,19 @@
 package kcumen.trazagro.peliculas.adapters
 
 
-import android.content.Context
-import android.net.Uri
+import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.squareup.picasso.Picasso
 import kcumen.trazagro.peliculas.R
+import kcumen.trazagro.peliculas.databinding.TemplateMovieBinding
 import kcumen.trazagro.peliculas.model.Movie
 import kcumen.trazagro.peliculas.util.inflate
-import kotlinx.android.synthetic.main.template_movie.view.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 class MovieAdapter:RecyclerView.Adapter<MovieHolder>(){
+
+    var onMovieSelcted:((position:Int)->Unit)? = null
+    var onFavoriteSelcted:((position:Int)->Unit)? = null
 
     var data:List<Movie> = emptyList()
         set(value){
@@ -24,7 +22,7 @@ class MovieAdapter:RecyclerView.Adapter<MovieHolder>(){
         }
 
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(data[position], position, this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder =
@@ -32,20 +30,23 @@ class MovieAdapter:RecyclerView.Adapter<MovieHolder>(){
 
     override fun getItemCount(): Int = data.size
 
+    fun onClickFavorite(position: Int){
+        onFavoriteSelcted?.invoke(position)
+    }
+
+    fun onClickMovie(position:Int){
+        onMovieSelcted?.invoke(position)
+    }
+
 }
 
 class MovieHolder(view: View): RecyclerView.ViewHolder(view) {
 
-    val dateFormat:SimpleDateFormat = SimpleDateFormat("yyyy/MM/dd",Locale.getDefault())
-    val context: Context = view.context
+    private val binding:TemplateMovieBinding = DataBindingUtil.bind(view)
 
-    fun bind(movie: Movie){
-        itemView.name.text = movie.name
-        itemView.duration.text = context.getString(R.string.duration, movie.duration)
-        itemView.release.text = dateFormat.format(movie.releaseDate)
-        Picasso.with(context)
-                .load(Uri.parse(movie.img))
-                .into(itemView.img)
-
+    fun bind(movie: Movie, position:Int, handler:MovieAdapter){
+        binding.movie = movie
+        binding.position = position
+        binding.handler = handler
     }
 }
