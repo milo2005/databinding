@@ -1,12 +1,14 @@
 package kcumen.trazagro.peliculas.model
 
+import android.annotation.SuppressLint
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
-/**
- * Created by darfe on 6/12/2017.
- */
+@SuppressLint("ParcelCreator")
+@Parcelize
 class Movie(val img:String,
             val name:String?,
             val duration:Int,
             val releaseDate: Date,
-            val sinopsis:String)
+            val sinopsis:String):Parcelable

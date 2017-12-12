@@ -1,11 +1,12 @@
 package kcumen.trazagro.peliculas
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import android.support.v7.app.AppCompatActivity
 import kcumen.trazagro.peliculas.adapters.MovieAdapter
 import kcumen.trazagro.peliculas.model.Movie
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -35,12 +36,13 @@ class MainActivity : AppCompatActivity() {
 
 
     fun goToDetail(position:Int){
-        Toast.makeText(this, "Pelicula : ${data[position].name}", Toast.LENGTH_SHORT)
-                .show()
+        /*val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("movie", 2)
+        startActivity(intent)*/
+        startActivity<DetailActivity>("movie" to data[position])
     }
 
     fun saveFavorite(position:Int){
-        Toast.makeText(this, "Favorito : ${data[position].name}", Toast.LENGTH_SHORT)
-                .show()
+        toast("Favorite: ${data[position].name}")
     }
 }
