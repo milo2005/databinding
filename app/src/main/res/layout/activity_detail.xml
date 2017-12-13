@@ -17,33 +17,11 @@
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    android:background="#ff0000"
-                    />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    android:background="#00ff00"
-                    />
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    android:background="#0000ff"
-                    />
-            </LinearLayout>
+            <include layout="@layout/content_detail" app:m="@{movie}"/>
 
         </android.support.v4.widget.NestedScrollView>
 

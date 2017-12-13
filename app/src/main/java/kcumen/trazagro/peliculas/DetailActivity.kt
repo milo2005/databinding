@@ -1,8 +1,10 @@
 package kcumen.trazagro.peliculas
 
 import android.databinding.DataBindingUtil
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -46,10 +48,24 @@ class DetailActivity : AppCompatActivity(), Callback {
         val vibrantColor = palette.getVibrantColor(primaryColor)
 
         collpasingToolbar.setContentScrimColor(vibrantColor)
-
-
+        setStatusBarColor(vibrantColor)
     }
 
-    override fun onError() {
+    override fun onError() {}
+
+    fun setStatusBarColor(color:Int){
+        var blue = Color.blue(color) - 30
+        var red = Color.red(color) - 30
+        var green = Color.green(color) - 30
+
+        blue = if(blue < 0) 0 else blue
+        red = if(red < 0) 0 else red
+        green = if(green < 0) 0 else green
+
+        val statusColor = Color.rgb(red, green, blue)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.statusBarColor = statusColor
+        }
     }
 }

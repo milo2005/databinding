@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         data.add(Movie("https://cdn.movieweb.com/img.news.tops/NEvQAF8mTk2Qzv_1_b/Justice-League-Movie-Runtime-Shortest-Dceu-Movie.jpg",
                 "Justice League", 120, Date(), ""))
         data.add(Movie("https://i.ytimg.com/vi/zNCz4mQzfEI/maxresdefault.jpg",
-                null, 110, Date(), ""))
+                null, 110, Date(), "dsadasdsa"))
         adapter.data = data
     }
 
